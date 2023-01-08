@@ -8,7 +8,6 @@ import { useRouter } from 'next/router';
 
 export default function Upload() {
     const [file, setFile] = useState<any>(null);
-    const [pdfURL, setPdfURL] = useState<any>('');
     const [loading, setLoading] = useState(false);
     const router = useRouter();
 
@@ -58,27 +57,26 @@ export default function Upload() {
                 getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
                     console.log('File available at', downloadURL);
                     toast.success('File uploaded successfully!');
-                    setPdfURL(downloadURL);
                     console.log(downloadURL.replace('https://firebasestorage.googleapis.com/v0/b/legal-ai-8ebe8.appspot.com/o', ''));
 
                     // pass the pdfurl to the router to display the pdf
-                    router.push(`/pdf/${downloadURL.replace('https://firebasestorage.googleapis.com/v0/b/legal-ai-8ebe8.appspot.com/o', '')}`);
+                    router.push(`/pdf/${downloadURL.replace('https://firebasestorage.googleapis.com/v0/b/legal-ai-8ebe8.appspot.com/o/pdfs%2', '')}`);
 
-                    // axios.post('http://localhost:5000/api/pdf', {
-                    //     pdfURL: pdfURL
-                    // })
-                    //     .then(function (response) {
-                    //         console.log(response);
-                    //         toast.loading('Processing your document...');
-                    //         setTimeout(() => {
-                    //             toast.success('Your document is ready!');
-                    //         }, 3000);
-                    //         setLoading(false);
-                    //     })
-                    //     .catch(function (error) {
-                    //         console.log(error);
-                    //         setLoading(false);
-                    //     });
+                    axios.post('http://localhost:5000/', {
+                        pdfURL: downloadURL
+                    })
+                        .then(function (response) {
+                            console.log(response);
+                            toast.loading('Processing your document...');
+                            setTimeout(() => {
+                                toast.success('Your document is ready!');
+                            }, 3000);
+                            setLoading(false);
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                            setLoading(false);
+                        });
                 });
             }
         );
