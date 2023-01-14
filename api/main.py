@@ -41,7 +41,7 @@ def chat():
     # text upload path
     path_txt = "/Users/arshad/Desktop/Projects/Legal/api/txts/"
 
-    # Fetch question
+    # fetch question
     question = request.data
     modified_question = question.decode().rstrip('"}').lstrip()[12:]
 
@@ -54,6 +54,7 @@ def chat():
     print("This is answer", answer)
 
     res = {"Answer": answer}
+    
 
     # return "PDF RECIEVED"
     return res, 200, {'Access-Control-Allow-Origin': '*'}
