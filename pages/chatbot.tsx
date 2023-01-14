@@ -1,79 +1,75 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { type } from "os";
 
-const Chatbot = () => {
-  const [messages, setMessages] = useState<{ text: string; sender: string }[]>(
-    []
-  );
+interface Chat {
+  message: string;
+  author: string;
+}
 
-  const addMessage = (newMessage: { text: string; sender: string }) => {
-    setMessages([...messages, newMessage]);
-  };
+const Chatbot: React.FC = () => {
+  const [input, setInput] = useState("");
+  const [chats, setChats] = useState<Chat[]>([]);
 
-  const MessageList = () => {
-    return (
-      <div className="">
-        {messages.map((message, index) => (
-          <div
-            key={index}
-            className={`bg-white rounded-lg p-4 ${
-              message.sender === "user1" ? "ml-auto" : ""
-            }`}
-          >
-            <p className="text-gray-800">{message.text}</p>
-            <p className="text-gray-600 text-xs">{message.sender}</p>
-          </div>
-        ))}
-      </div>
-    );
-  };
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    // console.log(typeof(input))
+    console.log('lol', input);
+    let a = {message: input}
 
-  const ChatForm = () => {
-    const [newMessage, setNewMessage] = useState("");
-
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-      addMessage({ text: newMessage, sender: "user1" });
-      setNewMessage("");
-
-      axios
-        .post(
-          "http://localhost:5000/explain",
-          { transcripts: messages },
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        )
-        .then((response) => {
-          setMessages(messages.concat(response.data.answer));
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-
-    return (
-      <form className="bg-gray-900 rounded-lg p-4" onSubmit={handleSubmit}>
-        <input
-          className="bg-black rounded-lg p-2 w-full"
-          type="text"
-          value={newMessage}
-          onChange={(e) => setNewMessage(e.target.value)}
-          placeholder="Enter your message"
-        />
-        <button className="bg-blue-500 text-white rounded-lg p-2 w-full">
-          Send Me your name
-        </button>
-      </form>
-    );
+    axios.post("http://localhost:5000/chat",
+    
+    {
+      message: input,
+    },
+    {
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
+    .then((response) => {
+      console.log(response.data.response_text);
+      const response_text = response.data.response_text;
+      setChats([...chats, { message: response_text, author: "bot" }]);
+      setInput("");
+    })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
-    <div className="flex h-full">
-      <MessageList />
-      <ChatForm />
+    <div className="container mx-auto">
+      <div className="bg-white rounded-lg overflow-hidden shadow-lg">
+        <div className="px-6 py-4">
+          <div className="flex flex-col">
+            {chats.map((chat, index) => (
+              <div
+                key={index}
+                className={`py-2 px-4 ${
+                  chat.author === "user" ? "bg-gray-200" : "bg-blue-200"
+                }`}
+              >
+                <p className="text-sm text-gray-800">{chat.message}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+        <form onSubmit={handleSubmit} className="bg-gray-200">
+          <input
+            type="text"
+            value={input}
+            onChange={(event) => setInput(event.target.value)}
+            className="px-4 py-2 rounded-lg w-full"
+          />
+          <button
+            type="submit"
+            className="px-4 py-2 rounded-lg bg-blue-500 text-white"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

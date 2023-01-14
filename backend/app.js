@@ -2,15 +2,15 @@ const express = require('express');
 const app = express();
 const fs = require('fs');
 var path = require('path')
-var extract = require('pdf-text-extract')
 const cors = require('cors');
-var download = require('download-pdf')
+var download = require('download-pdf');
+const axios = require('axios');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors(
     {
-        origin: 'http://localhost:3000',
+        origin: '*',
         credentials: true
     }
 ));
@@ -36,21 +36,21 @@ app.post('/pdf', (req, res) => {
         }
         console.log("Done");
 
-        extract(filePath, { splitPages: false }, function (err, text) {
-            if (err) {
-                console.log(err);
-                return res.status(500).json({ message: 'Error while extracting text from PDF' });
-            }
-            console.log('text', text)
+        axios.post('http://127.0.0.1:5000/', {
+            fileName: fileName,
         })
+            .then(function (response) {
+                console.log(response);
+                return res.status(200).json({ message: 'PDF fileName sent' });
+            })
+            .catch(function (error) {
+                console.log(error);
+                return res.status(500).json({ message: 'Error while sending PDF fileName' });
+            });
     })
 
-    res.status(200).json({ message: 'PDF downloaded' });
 });
-
 
 app.listen(8800, () => {
     console.log('Legal AI Backend listening on Port 8800!');
 });
-
-
