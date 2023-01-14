@@ -62,7 +62,7 @@ export default function Upload() {
                     // pass the pdfurl to the router to display the pdf
                     router.push(`/pdf/${downloadURL.replace('https://firebasestorage.googleapis.com/v0/b/legal-ai-8ebe8.appspot.com/o/pdfs%2', '')}`);
 
-                    axios.post('http://localhost:5000/', {
+                    axios.post('http://localhost:5000/explain', {
                         pdfURL: downloadURL
                     })
                         .then(function (response) {
