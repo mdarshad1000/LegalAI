@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 const Chatbot = () => {
   const [messages, setMessages] = useState<{ text: string; sender: string }[]>(
@@ -34,12 +35,29 @@ const Chatbot = () => {
       e.preventDefault();
       addMessage({ text: newMessage, sender: "user1" });
       setNewMessage("");
+
+      axios
+        .post(
+          "http://localhost:5000/explain",
+          { transcripts: messages },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        .then((response) => {
+          setMessages(messages.concat(response.data.answer));
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     };
 
     return (
-      <form className="bg-gray-200 rounded-lg p-4" onSubmit={handleSubmit}>
+      <form className="bg-gray-900 rounded-lg p-4" onSubmit={handleSubmit}>
         <input
-          className="bg-white rounded-lg p-2 w-full"
+          className="bg-black rounded-lg p-2 w-full"
           type="text"
           value={newMessage}
           onChange={(e) => setNewMessage(e.target.value)}
