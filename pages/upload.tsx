@@ -62,6 +62,7 @@ export default function Upload() {
                     toast.loading('Processing your document...');
                     
                     axios.post('http://localhost:8800/pdf', {
+
                         pdfURL: downloadURL
                     })
                         .then(function (response) {
