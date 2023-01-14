@@ -59,18 +59,19 @@ export default function Upload() {
                     toast.success('File uploaded successfully!');
                     console.log(downloadURL.replace('https://firebasestorage.googleapis.com/v0/b/legal-ai-8ebe8.appspot.com/o', ''));
 
-                    // pass the pdfurl to the router to display the pdf
-                    router.push(`/pdf/${downloadURL.replace('https://firebasestorage.googleapis.com/v0/b/legal-ai-8ebe8.appspot.com/o/pdfs%2', '')}`);
+                    toast.loading('Processing your document...');
+                    
+                    axios.post('http://localhost:8800/pdf', {
 
-                    axios.post('http://localhost:5000/explain', {
                         pdfURL: downloadURL
                     })
                         .then(function (response) {
                             console.log(response);
-                            toast.loading('Processing your document...');
                             setTimeout(() => {
                                 toast.success('Your document is ready!');
                             }, 3000);
+
+                            router.push(`/pdf/${downloadURL.replace('https://firebasestorage.googleapis.com/v0/b/legal-ai-8ebe8.appspot.com/o/pdfs%2', '')}`);
                             setLoading(false);
                         })
                         .catch(function (error) {
