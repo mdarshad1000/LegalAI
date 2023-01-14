@@ -52,4 +52,4 @@ def conversation(pdf_file, question):
     return chain({"input_documents": docs, "question": query}, return_only_outputs=True)['output_text']
 
 
-# print(conversation(pdf_file, "Who is a resident of Queens?"))
+print(conversation(pdf_file, "Who is a resident of Queens?"))

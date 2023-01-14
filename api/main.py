@@ -1,41 +1,64 @@
 # Importing dependencies
-from flask import Flask, request
+from flask import Flask, request, g
 from flask_cors import CORS, cross_origin
 from app import convert_pdf, conversation
 
-app = Flask(__name__)
-CORS(app,)
 
-# Global var to store document
-source_document = None
+app = Flask(__name__)
+
+app.config['SECRET_KEY'] = 'This is a super secret keyyyyy'
+
+CORS(app)
+
 
 @cross_origin('*')
 @app.route('/', methods=["POST"])
 def home():
 
-    # pdf upload path
-    path = "/Users/arshad/Desktop/Projects/Legal/backend/pdfs/"
+    # pdf & text upload path
+    path_pdf = "/Users/arshad/Desktop/Projects/Legal/backend/pdfs/"
+    path_txt = "/Users/arshad/Desktop/Projects/Legal/api/txts/"
 
     # fetch filename from Node backend
     query = request.json["fileName"]
+    # print(query)
 
     # convert pdf to text
-    global source_document
-    source_document = convert_pdf(path+query)
+    
+    stored_document = convert_pdf(path_pdf + query)
 
-    return "PDF RECEIVED"
+    with(open(f"{path_txt}file.txt", 'w')) as file:
+        file.write(stored_document)
+
+    return "PDF RECIEVED"
 
 
-@app.route('/chat', methods=['POST'])
+
+# @cross_origin("*", supports_credentials=True)
+@app.route('/chat', methods=["POST", "GET"])
 def chat():
     
-    # fetch question
-    question = request.json["question"]
+    # text upload path
+    path_txt = "/Users/arshad/Desktop/Projects/Legal/api/txts/"
 
-    # generate answers
-    answer = conversation(source_document, question)
+    # Fetch question
+    question = request.data
+    modified_question = question.decode().rstrip('"}').lstrip()[12:]
 
-    return {"Answer": answer}
+    # Load the uploaded text
+    with(open(f"{path_txt}file.txt", "r")) as file:
+        contents = file.read()
+
+    # generate answers 
+    answer = conversation(contents, modified_question)
+    print("This is answer", answer)
+
+    res = {"Answer": answer}
+
+    # return "PDF RECIEVED"
+    return res, 200, {'Access-Control-Allow-Origin': '*'}
+
+    # return "HIHIHIHIHI"
 
 
 if __name__ == '__main__':
