@@ -28,9 +28,9 @@ const Chatbot: React.FC = () => {
       }
     })
     .then((res) => {
-      console.log(res.data.response_text);
-      const response_text = res.data.response_text;
-      setChats([...chats, { message: response_text, author: "bot" }]);
+      console.log(res.data.Answer);
+      const Answer = res.data.Answer;
+      setChats([...chats, { message: Answer, author: "bot" }]);
       setInput("");
     })
       .catch((error) => {
