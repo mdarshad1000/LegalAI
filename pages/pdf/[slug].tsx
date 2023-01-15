@@ -50,10 +50,9 @@ export default function Pdf() {
           mollitia deserunt saepe!
         </p>
 
-        {/* <MyForm /> */}
         <Chatbot />
 
-        <div className="fixed bottom-0 right-0 m-4">
+        {/* <div className="fixed bottom-0 right-0 m-4">
           <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
             <div className="bg-white rounded-full h-8 w-8 flex items-center justify-center">
               <svg
@@ -73,7 +72,7 @@ export default function Pdf() {
               </svg>
             </div>
           </button>
-        </div>
+        </div> */}
       </div>
     </div>
   );

@@ -2,6 +2,7 @@
 from flask import Flask, request
 from flask_cors import CORS, cross_origin
 from app import convert_pdf, conversation
+import os
 
 # Create flask instance
 app = Flask(__name__)
@@ -15,8 +16,8 @@ CORS(app)
 def home():
 
     # pdf & text upload path
-    path_pdf = "/Users/arshad/Desktop/Projects/Legal/backend/pdfs/"
-    path_txt = "/Users/arshad/Desktop/Projects/Legal/api/txts/"
+    path_pdf = os.environ.get("path_pdf")
+    path_txt = os.environ.get("path_txt")
 
     # fetch filename from Node backend
     query = request.json["fileName"]
@@ -38,7 +39,8 @@ def home():
 def chat():
     
     # text upload path
-    path_txt = "/Users/arshad/Desktop/Projects/Legal/api/txts/"
+    path_txt = os.environ.get("path_txt")
+
 
     # fetch user's question
     question = request.data
