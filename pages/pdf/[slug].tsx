@@ -41,15 +41,14 @@ export default function Pdf() {
       <div className="flex w-1/2 p-2 flex-col">
         <div className="flex border-b p-2 w-full">
           <h1 className="font-semibold text-3xl mx-auto">
-            Page Analysis for PDF
+            Navigating the law. One question at a time.
           </h1>
         </div>
 
         <p className="p-8">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Perferendis
-          mollitia deserunt saepe!
+          <b>Unlock the power of your legal documents with our user-friendly web app.
+            Get quick and accurate answers to understand your legal rights and obligations.</b>
         </p>
-
         <Chatbot />
 
         {/* <div className="fixed bottom-0 right-0 m-4">
