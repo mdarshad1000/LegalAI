@@ -14,25 +14,29 @@ const Chatbot: React.FC = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     // console.log(typeof(input))
-    console.log('lol', input);
-    let a = {message: input}
+    console.log("lol", input);
+    let a = { message: input };
+    setChats([...chats, { message: input, author: "user" }]);
 
-    axios.post("http://localhost:5000/chat",
-    
-    {
-      message: input,
-    },
-    {
-      headers: {
-        'Content-Type': 'application/json',
-      }
-    })
-    .then((res) => {
-      console.log(res.data.Answer);
-      const Answer = res.data.Answer;
-      setChats([...chats, { message: Answer, author: "bot" }]);
-      setInput("");
-    })
+    axios
+      .post(
+        "http://localhost:5000/chat",
+
+        {
+          message: input,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res.data.Answer);
+        const Answer = res.data.Answer;
+        setChats([...chats, { message: Answer, author: "bot" }]);
+        setInput("");
+      })
       .catch((error) => {
         console.log(error);
       });
@@ -40,33 +44,50 @@ const Chatbot: React.FC = () => {
 
   return (
     <div className="container mx-auto">
-      <div className="bg-white rounded-lg overflow-hidden shadow-lg">
-        <div className="px-6 py-4">
+      <div className="bg-gray-900 rounded-lg overflow-hidden shadow-lg mx-10">
+        <div className="my-2">
           <div className="flex flex-col">
             {chats.map((chat, index) => (
               <div
                 key={index}
                 className={`py-2 px-4 ${
-                  chat.author === "user" ? "bg-gray-200" : "bg-blue-200"
+                  chat.author === "user"
+                    ? "text-right bg-gray-900 text-gray-400"
+                    : "text-left bg-gray-400 text-gray-900"
                 }`}
               >
-                <p className="text-sm text-gray-800">{chat.message}</p>
+                <p className="text-m bg-gray-800 px-4 py-2 rounded-lg">
+                  {chat.message}
+                </p>
               </div>
             ))}
           </div>
         </div>
-        <form onSubmit={handleSubmit} className="bg-gray-200">
+        <form
+          onSubmit={handleSubmit}
+          className="bg-gray-800 mx-4 my-4 rounded-lg"
+        >
           <input
             type="text"
             value={input}
             onChange={(event) => setInput(event.target.value)}
-            className="px-4 py-2 rounded-lg w-full"
+            className="px-4 py-3 rounded-lg w-[93%] bg-inherit border-none outline-none text-white"
           />
-          <button
-            type="submit"
-            className="px-4 py-2 rounded-lg bg-blue-500 text-white"
-          >
-            Submit
+          <button type="submit" className="px-2 pt-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="bg-gray-700"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              className="w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"
+              />
+            </svg>
           </button>
         </form>
       </div>
