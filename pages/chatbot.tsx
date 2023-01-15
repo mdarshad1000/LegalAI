@@ -1,4 +1,4 @@
-import React, { useState, useRef, useLayoutEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 
 interface Chat {
@@ -12,7 +12,7 @@ const Chatbot: React.FC = () => {
 
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (chatContainerRef.current) {
       chatContainerRef.current.scrollTop =
         chatContainerRef.current.scrollHeight;
@@ -83,7 +83,12 @@ const Chatbot: React.FC = () => {
               type="text"
               value={input}
               placeholder="Ask anything about your document..."
-              onChange={(event) => setInput(event.target.value)}
+              onChange={(event) =>
+                setInput(
+                  event.target.value.charAt(0).toUpperCase() +
+                    event.target.value.slice(1)
+                )
+              }
               className="bg-inherit border-none outline-none text-white w-full"
             />
             <button type="submit" className="ml-2">
