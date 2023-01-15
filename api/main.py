@@ -1,13 +1,12 @@
 # Importing dependencies
-from flask import Flask, request, g
+from flask import Flask, request
 from flask_cors import CORS, cross_origin
 from app import convert_pdf, conversation
 
-
+# Create flask instance
 app = Flask(__name__)
 
-app.config['SECRET_KEY'] = 'This is a super secret keyyyyy'
-
+# config to handle CORS requests
 CORS(app)
 
 
@@ -24,42 +23,41 @@ def home():
     # print(query)
 
     # convert pdf to text
-    
     stored_document = convert_pdf(path_pdf + query)
 
+    # save the converted pdf as txt to retrieve later
     with(open(f"{path_txt}file.txt", 'w')) as file:
         file.write(stored_document)
 
-    return "PDF RECIEVED"
+    return "PDF RECIEVED!!!"
 
 
 
-# @cross_origin("*", supports_credentials=True)
+@cross_origin("*", supports_credentials=True)
 @app.route('/chat', methods=["POST", "GET"])
 def chat():
     
     # text upload path
     path_txt = "/Users/arshad/Desktop/Projects/Legal/api/txts/"
 
-    # fetch question
+    # fetch user's question
     question = request.data
     modified_question = question.decode().rstrip('"}').lstrip()[12:]
 
-    # Load the uploaded text
+    # Load the uploaded txt file (Legal Doc)
     with(open(f"{path_txt}file.txt", "r")) as file:
         contents = file.read()
 
     # generate answers 
     answer = conversation(contents, modified_question)
-    print("This is answer", answer)
+    print(answer)
 
     res = {"Answer": answer}
-    
+    print(res)
 
-    # return "PDF RECIEVED"
-    return res, 200, {'Access-Control-Allow-Origin': '*'}
+    return res
 
-    # return "HIHIHIHIHI"
+
 
 
 if __name__ == '__main__':

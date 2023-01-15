@@ -27,9 +27,9 @@ const Chatbot: React.FC = () => {
         'Content-Type': 'application/json',
       }
     })
-    .then((response) => {
-      console.log(response.data.response_text);
-      const response_text = response.data.response_text;
+    .then((res) => {
+      console.log(res.data.response_text);
+      const response_text = res.data.response_text;
       setChats([...chats, { message: response_text, author: "bot" }]);
       setInput("");
     })
