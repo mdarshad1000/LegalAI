@@ -22,24 +22,15 @@ const Chatbot: React.FC = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    console.log("lol", input);
     setChats([...chats, { message: input, author: "user" }]);
 
-    axios
-      .post(
-        "http://localhost:5000/chat",
-
-        {
-          message: input,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
+    axios.post("http://127.0.0.1:5000/chat",
+      {
+        message: input,
+      }
+    )
       .then((res) => {
-        console.log(res.data.Answer);
+        console.log('ass', res.data.Answer);
         const Answer = res.data.Answer;
         setChats([
           ...chats,
@@ -49,7 +40,7 @@ const Chatbot: React.FC = () => {
         setInput("");
       })
       .catch((error) => {
-        console.log(error);
+        console.log('bruh', error);
       });
   };
 
@@ -57,26 +48,24 @@ const Chatbot: React.FC = () => {
     <div className="mx-2">
       <div
         ref={chatContainerRef}
-        className="max-h-[500px] bg-neutral-900 rounded-lg shadow-lg mx-2 px-2 overflow-y-auto scroll-smooth"
+        className="max-h-[500px] bg-neutral-900 rounded-lg shadow-lg mx-2 overflow-y-auto scroll-smooth"
       >
         {chats.map((chat, index) => (
           <div
             key={index}
-            className={`py-0.5 rounded-lg mx-2.5 my-2 ${
-              chat.author === "user" ? "text-right" : "text-left"
-            }`}
+            className={`py-0.5 rounded-lg mx-2.5 my-2 ${chat.author === "user" ? "text-right" : "text-left"
+              }`}
           >
             <span
-              className={`inline-block px-2 py-1 leading-8 text-m rounded-lg ${
-                chat.author === "user" ? "bg-gray-700" : "bg-gray-800"
-              }`}
+              className={`inline-block px-2 py-1 leading-8 text-m rounded-lg ${chat.author === "user" ? "bg-gray-700" : "bg-[#147efb]"
+                }`}
             >
               {chat.message}
             </span>
           </div>
         ))}
       </div>
-      <div className="bg-zinc-800 mx-4 rounded-lg fixed bottom-2 z-1 w-[44rem]">
+      <div className="bg-zinc-800 mx-4 rounded-lg z-1 p-2 drop-shadow-md w-[46vw] bottom-2 absolute">
         <form onSubmit={handleSubmit} className="">
           <div className="px-4 py-2 flex items-center">
             <input
@@ -86,7 +75,7 @@ const Chatbot: React.FC = () => {
               onChange={(event) =>
                 setInput(
                   event.target.value.charAt(0).toUpperCase() +
-                    event.target.value.slice(1)
+                  event.target.value.slice(1)
                 )
               }
               className="bg-inherit border-none outline-none text-white w-full"
