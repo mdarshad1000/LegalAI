@@ -44,6 +44,7 @@ def chat():
 
     # fetch user's question
     question = request.data
+    # Change the byteString to String
     modified_question = question.decode().rstrip('"}').lstrip()[12:]
 
     # Load the uploaded txt file (Legal Doc)
@@ -52,10 +53,10 @@ def chat():
 
     # generate answers 
     answer = conversation(contents, modified_question)
-    print(answer)
+    # print(answer)
 
     res = {"Answer": answer}
-    print(res)
+    # print(res)
 
     return res
 
