@@ -1,9 +1,9 @@
 # Importing dependencies
 from langchain.embeddings.openai import OpenAIEmbeddings
-from langchain.text_splitter import CharacterTextSplitter, NLTKTextSplitter
+from langchain.text_splitter import NLTKTextSplitter
 from langchain.vectorstores.faiss import FAISS
 from langchain.prompts import PromptTemplate
-from langchain.chains.question_answering import load_qa_chain
+
 from langchain.chains.qa_with_sources import load_qa_with_sources_chain
 
 from langchain.llms import OpenAI
@@ -22,7 +22,7 @@ def convert_pdf(file_name):
 
 pdf_file = convert_pdf('POA.pdf')
 a = pdf_file.split('.')
-print(len(a))
+# print(len(a))
 
 
 # Propmt Template
@@ -31,6 +31,7 @@ Include any important definitions, context, and any relevant legal precedent or 
 Also, usually try to avoid using jargon or technical terms that may be confusing to someone without a legal background.
 Given the following legal document, create a final answer. 
 If you don't know the answer, just say that you don't know. Don't try to make up an answer.
+If the user asks gibberish or something, just say that you dont understand.
 QUESTION: {question}
 =========
 {summaries}

@@ -1,43 +1,51 @@
-RENT AGREEMENT
-THIS RENT AGREEMENT (this "Agreement") is made and entered into on the 15th day
-of June, 2022 by and between:
-Lessor: Captain Jack Sparrow, an individual with an address at The Black Pearl,
-Caribbean Sea (the "Lessor");
-Lessee: Will Turner, an individual with an address at Port Royal, Jamaica (the
-"Lessee").
-WHEREAS, the Lessor is the lawful owner and possessor of certain premises known as
-a cabin on board The Black Pearl, located on the Caribbean Sea (the "Premises"); and
-WHEREAS, the Lessee desires to rent the Premises for residential purposes only;
-NOW, THEREFORE, the Lessor and the Lessee hereby agree as follows:
-1. Premises. The Lessor hereby rents to the Lessee the Premises, together with all
-ﬁxtures, appliances, and personal property located thereon, for residential
-purposes only, for a term of six (6) months, commencing on the 15th day of
-June, 2022 and ending on the 14th day of December, 2022 (the "Term").
-2. Rent. The Lessee shall pay to the Lessor the sum of $1000 per month as rent
-for the Premises (the "Rent"), which shall be due and payable on the ﬁrst day of
-each month during the Term. The Lessee shall also pay a security deposit of
-$3000 (the "Security Deposit"), which shall be returned to the Lessee at the end
-of the Term if the Premises are returned in the same condition as when
-received.
-3. Utilities. The Lessee shall be responsible for paying for all utilities used during
-the Term, including but not limited to electricity, water, and internet.
-4. Maintenance. The Lessor shall be responsible for the maintenance and repair of
-the Premises. The Lessee shall notify the Lessor of any necessary repairs or
-maintenance and the Lessee shall keep the Premises in a clean and orderly
-condition.
-5. Quiet Enjoyment. The Lessee shall not use the Premises in such a manner as to
-disturb the peace and quiet of the surrounding area.6. Subletting. The Lessee shall not sublet the Premises without the prior written
-consent of the Lessor.
-7. Termination. Either party may terminate this Agreement upon giving written
-notice to the other party at least thirty (30) days prior to the desired termination
-date.
-8. Governing Law. This Agreement shall be governed by and construed in
-accordance with the laws of the Caribbean Sea.
-9. Entire Agreement. This Agreement constitutes the entire agreement between
-the parties and supersedes all prior agreements and understandings, whether
-oral or written, regarding the subject matter of this Agreement.
-IN WITNESS WHEREOF, the parties have executed this Agreement as of the date ﬁrst
-above written.
-Lessor (Captain Jack Sparrow) Lessee (Will Turner)
-ACKNOWLEDGED AND AGREED:
-Lessor (Captain Jack Sparrow) Lessee (Will Turner)
+Date: ____/____/_______
+To,
+FedEx Express Transportation and Supply Chain Services (India) Pvt. Ltd.
+Boomerang, Unit 801, 8th Floor, A-Wing
+Chandivali Farm Road, Andheri (E)
+Mumbai - 400072
+Authorization with Know Your Customer document
+We hereby authorize FedEx Express Transportation and Supply Chain Services (India) Pvt. Ltd., Federal Express 
+Corporation and their affiliates (together hereinafter “FedEx”, which expression shall include their respective holding 
+companies and their customs clearance agents), to:
+ 1)  act as our authorized courier and/or agent to do all necessary acts on our behalf for customs clearance including  
+  filing of documents, declarations and Bills of Entry/ Shipping Bills for clearance of all import and export shipments  
+  consigned to or by us from time to time through the courier, express or formal customs clearance mode.
+ 2)  file documents for import or export customs clearance of shipments based on the declaration and information 
+  regarding the shipments provided to FedEx by us or in the absence of the same, the information for import  
+  shipments provided to FedEx by the consignors for delivery in India.
+ a)  act in capacity of transporter of goods, and generate E-Way Bill 01 Part A as per allowed provisions of E-Way bill  
+  rules for shipments of landed value greater than INR 50,000  
+   i)  Part A comprising of details of GSTIN of recipient, place of delivery (PIN Code), invoice or challan number  
+    and date, value of goods, HSN code, transport document number (Airway Bill Number) and reasons for  
+    transportation
+   ii)  Part B comprising of transporter details (Vehicle number).
+This authorization shall remain valid until revoked in writing and acknowledged by FedEx in writing and shall cover all 
+our shipments sent by or addressed to our various offices / branches in India. This authorization may be produced and 
+presented before any customs station in India as a formal authorization to your company for customs clearance of our 
+shipments by you or your authorized agents.
+Please provide the following Know Your Customer (KYC) document, as applicable.
+# Category Documents Required
+1. Individual  Any one of the following document
+   □ 
+Passport Copy with address page.
+   □ 
+Aadhaar Card
+   □ 
+PAN Card
+   □ 
+Voter ID Card
+   □ 
+2. Firms, company, institution registered  GSTIN registration copy
+Under GST Laws    □ IEC number ___________________________
+   □ 
+3. Exempted/ Non Registered firms,  PAN Card
+company, institution under GST Laws    □ IEC number ___________________________
+Embassy/ U.N. Bodies/ Government     □ 
+4. Unique Identification Number (UIN) copy
+entities
+ IEC number is mandatory to file shipment for clearance. The name / branch address of company as on the invoice should 
+match as with that on shipping documents accompanying the shipment
+We/ I duly declare that the above document is the true copy and verifiable with original KYC document if called upon by 
+customs / government authorities.
+Name __________________________________      Sign/Stamped by Authorized Signatory 
