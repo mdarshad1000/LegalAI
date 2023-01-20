@@ -15,14 +15,16 @@ import pdfplumber as pp
 def convert_pdf(file_name):
     with pp.open(file_name) as book:
         temp = ""
+        page_count = 0
         for page_no, page in enumerate(book.pages, start=1):
             data = page.extract_text()
             temp += data
-    return temp
+            page_count += 1
+    return temp, page_count
 
 pdf_file = convert_pdf('POA.pdf')
-a = pdf_file.split('.')
-# print(len(a))
+
+# print(pdf_file)
 
 
 # Propmt Template
@@ -43,11 +45,11 @@ PROMPT = PromptTemplate(template=template, input_variables=["summaries", "questi
 
 # Ask questions regarding the uploaded document
 def conversation(pdf_file, question):
-
+    print(pdf_file)
     # Used to split the whole context into smaller chunks, here it's not splitting as the spearator is None
-    text_splitter = NLTKTextSplitter(chunk_size=1300)
+    text_splitter = NLTKTextSplitter(chunk_size=5000)
     texts = text_splitter.split_text(pdf_file)
-    print(len(texts))
+    print((texts))
     # Initialize embeddings 
     embeddings = OpenAIEmbeddings()
 

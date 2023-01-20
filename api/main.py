@@ -3,8 +3,11 @@ from flask import Flask, request
 from flask_cors import CORS, cross_origin
 from app import convert_pdf, conversation
 import os
+import requests
+import json
 
-# Create flask instance
+
+# Create Flask instance
 app = Flask(__name__)
 
 # config to handle CORS requests
@@ -28,7 +31,7 @@ def home():
 
     # save the converted pdf as txt to retrieve later
     with(open(f"{path_txt}file.txt", 'w')) as file:
-        file.write(stored_document)
+        file.write(stored_document[0])      # select the first element i.e the text content
 
     return "PDF RECIEVED!!!"
 
@@ -61,6 +64,41 @@ def chat():
     return res
 
 
+@cross_origin("*", supports_credentials=True)
+@app.route('/summarize', methods=["POST", "GET"])
+def summarize():
+
+    path_txt = os.environ.get("path_txt")
+
+    with(open(f"{path_txt}file.txt", "r")) as file:
+        contents = file.read()
+
+    if request.method == 'POST':
+
+        url = "https://api.ai21.com/studio/v1/experimental/summarize"
+
+        payload = {
+            "text": contents,
+            "documentType": "TEXT",
+            "maxTokens": 234,
+        }
+        headers = {
+            "accept": "application/json",
+            "content-type": "application/json",
+            "Authorization": "Bearer 9y72PNOvg2dnqoZsF1d7UGtTGUHlaRG5"
+        }
+
+        response = requests.post(url, json=payload, headers=headers)
+
+        json_string = response.text
+        data = json.loads(json_string)
+        dataParsed = data["summaries"][0]["text"]
+
+        summary = {"Summary": dataParsed}
+
+        return summary
+
+    return "This is also working HUEHUE"
 
 
 if __name__ == '__main__':
