@@ -80,7 +80,6 @@ def summarize():
         payload = {
             "text": contents,
             "documentType": "TEXT",
-            "maxTokens": 234,
         }
         headers = {
             "accept": "application/json",
@@ -93,6 +92,7 @@ def summarize():
         json_string = response.text
         data = json.loads(json_string)
         dataParsed = data["summaries"][0]["text"]
+        print(dataParsed)
 
         summary = {"Summary": dataParsed}
 
