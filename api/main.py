@@ -3,8 +3,11 @@ from flask import Flask, request
 from flask_cors import CORS, cross_origin
 from app import convert_pdf, conversation
 import os
-import requests
-import json
+import openai
+
+import os
+
+openai.api_key = os.environ.get("OPENAI_API_KEY")
 
 
 # Create Flask instance
@@ -73,32 +76,26 @@ def summarize():
     with(open(f"{path_txt}file.txt", "r")) as file:
         contents = file.read()
 
-    if request.method == 'POST':
+    prompt = (
+        "Summarize the following document in eight lines:\n\n"
+        f"{contents}"
+    )
+    if request.method == "POST":
 
-        url = "https://api.ai21.com/studio/v1/experimental/summarize"
+        response = openai.Completion.create(
+            model="text-davinci-003",
+            prompt=prompt,
+            temperature=0,
+            max_tokens=1000,
+            top_p=1,
+            frequency_penalty=0,
+            presence_penalty=0
+        )
 
-        payload = {
-            "text": contents,
-            "documentType": "TEXT",
-        }
-        headers = {
-            "accept": "application/json",
-            "content-type": "application/json",
-            "Authorization": "Bearer 9y72PNOvg2dnqoZsF1d7UGtTGUHlaRG5"
-        }
+        summary = response["choices"][0]["text"].lstrip('.')
 
-        response = requests.post(url, json=payload, headers=headers)
-
-        json_string = response.text
-        data = json.loads(json_string)
-        dataParsed = data["summaries"][0]["text"]
-        print(dataParsed)
-
-        summary = {"Summary": dataParsed}
-
-        return summary
-
-    return "This is also working HUEHUE"
+        return {"Summary": summary}
+    return "<h1>This is working HUEHUE</h1>"
 
 
 if __name__ == '__main__':
