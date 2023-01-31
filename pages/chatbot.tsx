@@ -47,7 +47,7 @@ const Chatbot: React.FC = () => {
     <div className='mx-2'>
       <div
         ref={chatContainerRef}
-        className='max-h-[45vh] bg-neutral-900 rounded-lg shadow-lg mx-2 overflow-y-auto scroll-smooth'
+        className='max-h-[38vh] bg-neutral-900 rounded-lg shadow-lg mx-2 overflow-y-auto scroll-smooth'
       >
         {chats.map((chat, index) => (
           <div

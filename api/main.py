@@ -1,7 +1,7 @@
 # Importing dependencies
 from flask import Flask, request
 from flask_cors import CORS, cross_origin
-from app import convert_pdf, conversation
+from hello import convert_pdf, conversation
 import os
 import openai
 
